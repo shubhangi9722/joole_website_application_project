@@ -1,54 +1,54 @@
 package com.itlizesession.Controllers;
 
-
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
-import com.itlizesession.Entity.Description;
 import com.itlizesession.Entity.Product;
-import com.itlizesession.Entity.ProductType;
-import com.itlizesession.Entity.TechnicalDetail;
 import com.itlizesession.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
-@ResponseBody
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
     // Get all products
-    @GetMapping("/products")
-    public List<Product> list() { return productService.findAllProducts(); }
+    @GetMapping("/allProducts")
+    public ResponseEntity<List<Product>> findAllProducts() { return new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK) ; }
 
-    @PostMapping("/addProducts")
-    public Product createProduct(@RequestParam("brand") String brand, @RequestParam("certification") String certification,
-                                 @RequestBody ProductType productType, @RequestBody TechnicalDetail technicalDetail, @RequestBody Description description) {
-        Product product1 = new Product();
-        product1.setProductBrand(brand);
-        product1.setCertification(certification);
-        product1.setProductType(productType);
-        product1.setTechnicalDetail(technicalDetail);
-        product1.setDescription(description);
-        return productService.createProduct(product1);
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> findProductBYId(@PathVariable int id) {
+        return new ResponseEntity<>(productService.getProduct(id), HttpStatus.OK);
     }
 
-    @GetMapping("/read/{id}")
-    public Product readProduct(@RequestParam("productId") Integer productId) {
-        return productService.getProduct(productId);
+    //    @PostMapping("/create")
+//    public Product createProduct(@RequestParam("brand") String brand, @RequestParam("certification") String certification,
+//                                 @RequestBody ProductType productType, @RequestBody TechnicalDetail technicalDetail, @RequestBody Description description) {
+//        Product product1 = new Product();
+//        product1.setProductBrand(brand);
+//        product1.setCertification(certification);
+//        product1.setProductType(productType);
+//        product1.setTechnicalDetail(technicalDetail);
+//        product1.setDescription(description);
+//        return productService.createProduct(product1);
+//    }
+//
+    @PostMapping("/addProduct")
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+        return new ResponseEntity<>(productService.createProduct(product), HttpStatus.OK);
     }
 
     @PutMapping("/updateProduct")
-    public Product updateProduct(@RequestBody Product product, @RequestParam("productId") Integer productId) {
-        productService.updateProduct(product, productId);
-        return productService.getProduct(productId);
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        productService.updateProduct(product, product.getProductId());
+        return new ResponseEntity<>(productService.getProduct(product.getProductId()), HttpStatus.OK) ;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public boolean deleteProduct(@RequestParam("productId") Integer productId) {
-        return productService.deleteProduct(productId);
+    @DeleteMapping("/deleteProduct/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable int id) {
+        return new ResponseEntity<>(productService.deleteProduct(id), HttpStatus.OK);
     }
 }
