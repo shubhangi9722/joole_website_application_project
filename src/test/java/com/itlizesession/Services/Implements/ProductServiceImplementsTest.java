@@ -140,7 +140,7 @@ class ProductServiceImplementsTest {
     void updateProduct() {
         Product toUpdate = productService.getProduct(2);
 //        System.out.println(toUpdate);
-        toUpdate.setProductBrand("Fulton Inc");
+        toUpdate.setProductBrand("Tester Inc");
 //        System.out.println(toUpdate);
         boolean isSuccessful = productService.updateProduct(toUpdate, 2);
 //        System.out.println(isSuccessful);
@@ -149,7 +149,7 @@ class ProductServiceImplementsTest {
 
     @Test
     void deleteProduct() {
-        boolean isSuccessful = productService.deleteProduct(15);
+        boolean isSuccessful = productService.deleteProduct(27);
         Assertions.assertTrue(isSuccessful);
     }
 
