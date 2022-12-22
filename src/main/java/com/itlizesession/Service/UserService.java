@@ -11,6 +11,8 @@ public interface UserService {
     // save operation
     User saveUser(User user);
 
+    User findByUsername(String username);
+
     // read operation
     List<User> listAll();
 

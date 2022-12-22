@@ -1,5 +1,6 @@
 package com.itlizesession.Service;
 
+import com.itlizesession.Entity.Role;
 import com.itlizesession.Entity.User;
 import com.itlizesession.Repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -26,7 +27,7 @@ class UserServiceTest {
         user.setUserName("defgwerg");
         user.setEmail("defgwerg@gmail.com");
         user.setPassword("dfhskdg");
-        user.setUser_type("customer");
+        user.setRole(Role.ADMIN);
         User savedUser = userService.saveUser(user);
         Assertions.assertEquals("defgwerg",savedUser.getUserName());
     }
@@ -44,15 +45,15 @@ class UserServiceTest {
     @Test
     void updateUser() {
         User user = repo.getById(8);
-        user.setUser_type("Consumer");
+        user.setRole(Role.ADMIN);
         repo.save(user);
-        Assertions.assertEquals("Consumer",user.getUser_type());
+        Assertions.assertEquals("Consumer",user.getRole());
     }
 
     @Test
     void deleteUserById() {
         Optional<User> user;
-        user = repo.findByEmail("gfh@gmail.com");
+        user = repo.findByuserName("gfh");
         userService.deleteUserById(user.orElseThrow().getId());
     }
 }

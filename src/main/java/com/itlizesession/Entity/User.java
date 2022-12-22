@@ -2,18 +2,16 @@
 package com.itlizesession.Entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "user_type")
-    private String user_type;
 
     @Column(name = "email")
     private String email;
@@ -24,6 +22,10 @@ public class User {
     @Column(name = "user_name")
     private String userName;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
+
     @OneToMany(mappedBy = "user", orphanRemoval = true,cascade = CascadeType.ALL,fetch = FetchType.EAGER )
     private Set<Project> projectList = new HashSet<Project>(){};
 
@@ -33,14 +35,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
     }
 
     public String getEmail() {
@@ -75,15 +69,21 @@ public class User {
         this.projectList = projectList;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", user_type='" + user_type + '\'' +
-                ", email='" + email + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userName='" + userName + '\'' +
-                ", projectList=" + projectList +
+                ", role=" + role +
                 '}';
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-@Transactional
+
 @Service
 public class TechnicalDetailServiceImplements implements TechnicalDetailService {
     @Autowired

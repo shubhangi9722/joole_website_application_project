@@ -1,6 +1,7 @@
 package com.itlizesession.Repository;
 
 
+import com.itlizesession.Entity.Role;
 import com.itlizesession.Entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ public class UserRepositoryTest {
         user.setUserName("gfh");
         user.setEmail("gfh@gmail.com");
         user.setPassword("rgrtjy");
-        user.setUser_type("customer");
+        user.setRole(Role.USER);
         User savedUser = repo.save(user);
         Assertions.assertEquals("gfh",user.getUserName());
     }
