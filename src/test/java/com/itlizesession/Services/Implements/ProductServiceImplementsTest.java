@@ -149,7 +149,7 @@ class ProductServiceImplementsTest {
 
     @Test
     void deleteProduct() {
-        boolean isSuccessful = productService.deleteProduct(27);
+        boolean isSuccessful = productService.deleteProduct(26);
         Assertions.assertTrue(isSuccessful);
     }
 
