@@ -1,7 +1,4 @@
-
 package com.itlizesession.Service.Implements;
-
-
 
 import com.itlizesession.Entity.User;
 import com.itlizesession.Repository.UserRepository;
@@ -17,13 +14,17 @@ public class UserServiceImplements implements UserService {
     @Autowired
     private UserRepository repository;
 
-    @Override
     public User saveUser(User user) {
         Optional<User> savedUser = repository.findByEmail(user.getEmail());
         if(savedUser.isPresent()){
             System.out.println("Employee already exist with given email:" + user.getEmail());
         }
         return repository.save(user);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return repository.findByuserName(username).orElse(null);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class UserServiceImplements implements UserService {
         assert existingUser != null;
         existingUser.setUserName(user.getUserName());
         existingUser.setPassword(user.getPassword());
-        existingUser.setUser_type(user.getUser_type());
+        existingUser.setRole(user.getRole());
         existingUser.setEmail(user.getEmail());
         return repository.save(existingUser);
     }
