@@ -20,12 +20,12 @@ public class UserRepositoryTest {
     @Test
     public void testAddNew() {
         User user = new User();
-        user.setUserName("gfh");
-        user.setEmail("gfh@gmail.com");
-        user.setPassword("rgrtjy");
+        user.setUserName("GDFNDG");
+        user.setEmail("GDFNDG@gmail.com");
+        user.setPassword("SHDDXJT");
         user.setRole(Role.USER);
         User savedUser = repo.save(user);
-        Assertions.assertEquals("gfh",user.getUserName());
+        Assertions.assertEquals("GDFNDG",user.getUserName());
     }
 
     @Test

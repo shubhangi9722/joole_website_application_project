@@ -14,6 +14,7 @@ public class UserServiceImplements implements UserService {
     @Autowired
     private UserRepository repository;
 
+    @Override
     public User saveUser(User user) {
         Optional<User> savedUser = repository.findByEmail(user.getEmail());
         if(savedUser.isPresent()){
@@ -33,8 +34,8 @@ public class UserServiceImplements implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
-        User existingUser = repository.findById(user.getId()).orElse(null);
+    public User updateUser(User user, int userId) {
+        User existingUser = repository.findById(userId).orElse(null);
 
         // asserting as these operations will take place only when its not null
         assert existingUser != null;

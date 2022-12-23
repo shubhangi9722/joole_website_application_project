@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -22,14 +23,16 @@ class UserServiceTest {
     private UserRepository repo;
 
     @Test
-    void saveUser() {
+    void createUser() {
         User user = new User();
-        user.setUserName("defgwerg");
-        user.setEmail("defgwerg@gmail.com");
-        user.setPassword("dfhskdg");
-        user.setRole(Role.ADMIN);
-        User savedUser = userService.saveUser(user);
-        Assertions.assertEquals("defgwerg",savedUser.getUserName());
+        user.setUserName("Mike Chen");
+        user.setEmail("mikeTester3@gmail.com");
+        user.setPassword("mike123");
+        user.setRole(Role.USER);
+        userService.saveUser(user);
+
+        User savedUser = repo.findById(user.getId()).orElse(null);
+        Assertions.assertEquals(user, savedUser);
     }
 
     @Test
@@ -43,17 +46,25 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUser() {
-        User user = repo.getById(8);
+    void updateRole() {
+        User user = repo.findById(1).orElse(null);
         user.setRole(Role.ADMIN);
-        repo.save(user);
-        Assertions.assertEquals("Consumer",user.getRole());
+        userService.updateUser(user,1);
+        Assertions.assertEquals("ADMIN",user.getRole());
+    }
+
+    @Test
+    void testSetRole() {
+        User user = repo.findById(2).orElse(null);
+        System.out.println(user);
+        user.setRole(Role.ADMIN);
+        userService.saveUser(user);
     }
 
     @Test
     void deleteUserById() {
         Optional<User> user;
-        user = repo.findByuserName("gfh");
+        user = repo.findByuserName("Qingrong");
         userService.deleteUserById(user.orElseThrow().getId());
     }
 }
