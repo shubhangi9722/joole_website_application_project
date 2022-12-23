@@ -1,5 +1,6 @@
 package com.itlizesession.Controllers;
 
+import com.itlizesession.Entity.Role;
 import com.itlizesession.Entity.User;
 import com.itlizesession.Service.UserService;
 import com.itlizesession.Service.MyUserDetailsService;
@@ -30,29 +31,24 @@ public class UserController {
     @Autowired
     private AuthenticationManager myauthenticaitonManager;
 
-    @PostMapping("/addUser")
-    public User addUser(@RequestBody User user) {
-        return service.saveUser(user);
+    @PostMapping("/createUser")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        if (service.findByUsername(user.getUserName()) != null) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        //user.setRole(Role.USER);
+        return new ResponseEntity<>(service.saveUser(user), HttpStatus.CREATED);
     }
-
-//    @PostMapping("/addUsers")
-//    public List<User> addUsers(@RequestBody List<User> users) {
-//        return service.saveUsers(users);
-//    }
 
     @GetMapping("/users")
     public List<User> findAllUsers() {
         return service.listAll();
     }
 
-//    @GetMapping("/user/{id}")
-//    public User findUserById(int id) {
-//        return service.(id);
-//    }
 
     @PutMapping("/updateUser")
-    public User updateUser(@RequestBody User user) {
-        return service.updateUser(user);
+    public User updateUser(@RequestBody User user, int id) {
+        return service.updateUser(user,id);
     }
 
     @DeleteMapping("/delete/{id}")

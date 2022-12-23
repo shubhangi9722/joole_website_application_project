@@ -1,0 +1,23 @@
+spring:
+  main:
+    allow-circular-references: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: hmsien2000
+    url: jdbc:mysql://127.0.0.1:3306/jooledb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+myUserName: joole
+
+server:
+  servlet:
+    context-path: /joole
+
+
