@@ -25,9 +25,9 @@ class UserServiceTest {
     @Test
     void createUser() {
         User user = new User();
-        user.setUserName("Mike Chen");
-        user.setEmail("mikeTester3@gmail.com");
-        user.setPassword("mike123");
+        user.setUserName("kiki Chen");
+        user.setEmail("kiki@gmail.com");
+        user.setPassword("kiki123");
         user.setRole(Role.USER);
         userService.saveUser(user);
 
@@ -47,9 +47,9 @@ class UserServiceTest {
 
     @Test
     void updateRole() {
-        User user = repo.findById(1).orElse(null);
+        User user = repo.findById(40).orElse(null);
         user.setRole(Role.ADMIN);
-        userService.updateUser(user,1);
+        userService.updateUser(user,40);
         Assertions.assertEquals("ADMIN",user.getRole());
     }
 

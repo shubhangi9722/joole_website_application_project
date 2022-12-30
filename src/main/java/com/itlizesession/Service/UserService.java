@@ -4,6 +4,7 @@ package com.itlizesession.Service;
 import com.itlizesession.Entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface UserService {
@@ -22,4 +23,5 @@ public interface UserService {
     // delete operation
     void deleteUserById(int userId);
 
+    Optional<User> findUserById(int id);
 }
