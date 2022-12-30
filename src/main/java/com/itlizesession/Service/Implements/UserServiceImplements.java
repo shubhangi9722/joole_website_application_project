@@ -4,6 +4,7 @@ import com.itlizesession.Entity.User;
 import com.itlizesession.Repository.UserRepository;
 import com.itlizesession.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +15,11 @@ public class UserServiceImplements implements UserService {
     @Autowired
     private UserRepository repository;
 
-    @Override
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public User saveUser(User user) {
-        Optional<User> savedUser = repository.findByEmail(user.getEmail());
-        if(savedUser.isPresent()){
-            System.out.println("Employee already exist with given email:" + user.getEmail());
-        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return repository.save(user);
     }
 
@@ -52,4 +52,10 @@ public class UserServiceImplements implements UserService {
 //                .orElseThrow(() -> new UserNotFoundException(userId));
         repository.deleteById(userId);
     }
+
+    @Override
+    public Optional<User> findUserById(int id) {
+        return Optional.empty();
+    }
+
 }

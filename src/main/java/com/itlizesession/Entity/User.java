@@ -20,7 +20,7 @@ public class User //implements Serializable
     @Column(name = "password")
     private String password;
 
-    @Column(name = "user_name")
+    @Column(name = "username")
     private String userName;
 
     @Enumerated(EnumType.STRING)
@@ -29,6 +29,16 @@ public class User //implements Serializable
 
     @OneToMany(mappedBy = "user", orphanRemoval = true,cascade = CascadeType.ALL,fetch = FetchType.EAGER )
     private Set<Project> projectList = new HashSet<Project>(){};
+
+    public User() {
+    }
+
+    public User(String email, String password, String userName, Role role) {
+     this.email = email;
+     this.password = password;
+     this.userName = userName;
+     this.role = role;
+    }
 
     public Integer getId() {
         return id;

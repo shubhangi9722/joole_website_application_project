@@ -13,11 +13,9 @@ spring:
       ddl-auto: update
     show-sql: true
 
-
-myUserName: joole
-
 server:
   servlet:
     context-path: /joole
+  port: 8081
 
 
