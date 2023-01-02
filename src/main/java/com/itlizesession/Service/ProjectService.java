@@ -2,32 +2,40 @@ package com.itlizesession.Service;
 
 
 import com.itlizesession.Entity.Project;
-import com.itlizesession.Entity.User;
 
 import java.util.List;
-import java.util.Set;
 
 public interface ProjectService {
-    Project createProject(Integer proj_id);
+    Project createProject(Project project);
 
-    Project saveProject(Project project);
+    Project getProject(Integer proj_id);
 
-    void createProjs();
+    List<Project> allProjects();
 
-    List<Project> findAll();
+    void delProject(Integer projId);
 
-    Project updateProjects(Project project);
-
-    List<Project> findProjectsByUserId(User user);
-
-    Set<Project> findProjectsByUser (User user);
-
-    List<Project> findProjectsByUserContaining(User user);
-
-    List<Project> findProjectsByIdContaining(Project project);
-
-    void delProject(Project project);
+    boolean updateProject(Project project, Integer project_id);
 
     Project save(Project project);
+
+
+
+
+
+//    void createProjs();
+//
+//    List<Project> findAll();
+//
+//    Project updateProjects(Project project);
+//
+//    List<Project> findProjectsByUserId(User user);
+//
+//    Set<Project> findProjectsByUser (User user);
+//
+//    List<Project> findProjectsByUserContaining(User user);
+//
+//    List<Project> findProjectsByIdContaining(Project project);
+//
+//    void delProject(Project project);
 
 }

@@ -17,7 +17,7 @@ public class Project {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = User.class)
 //    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     //@JsonBackReference
     @JsonIgnore
     private User user;
