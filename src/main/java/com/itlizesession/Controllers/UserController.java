@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@WebServlet("/user")
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
