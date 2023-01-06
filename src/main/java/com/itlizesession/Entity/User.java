@@ -12,7 +12,7 @@ public class User //implements Serializable
          {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer user_id;
+    private Integer id;
 
     @Column(name = "email")
     private String email;
@@ -41,11 +41,11 @@ public class User //implements Serializable
     }
 
     public Integer getId() {
-        return user_id;
+        return id;
     }
 
     public void setId(Integer id) {
-        this.user_id = id;
+        this.id = id;
     }
 
     public String getEmail() {

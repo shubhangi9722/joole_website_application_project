@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.annotation.WebServlet;
 import java.util.List;
 
+
+@WebServlet("/product/allProducts")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
