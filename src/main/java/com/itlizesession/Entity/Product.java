@@ -37,10 +37,9 @@ public class Product {
     @JoinColumn(name = "description_id")
     private Description description;
 
-    @OneToMany(mappedBy = "product", orphanRemoval = true,cascade = CascadeType.ALL,fetch = FetchType.EAGER )
-    //@JsonManagedReference
-    //@JsonIgnore
-    private List<ProjectProduct> productList;
+    @OneToMany(mappedBy = "product", orphanRemoval = true,cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+    @JsonIgnore
+    private Set<ProjectProduct> productList = new HashSet<>();
 
 
     public Product() {
@@ -55,11 +54,11 @@ public class Product {
         this.productId = productId;
     }
 
-    public List<ProjectProduct> getProductList() {
+    public Set<ProjectProduct> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<ProjectProduct> productList) {
+    public void setProductList(Set<ProjectProduct> productList) {
         this.productList = productList;
     }
 

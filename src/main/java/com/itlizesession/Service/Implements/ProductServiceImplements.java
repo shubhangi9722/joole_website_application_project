@@ -8,10 +8,12 @@ import com.itlizesession.Repository.ProductTypeRepository;
 import com.itlizesession.Repository.TechnicalDetailRepository;
 import com.itlizesession.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Component
 public class ProductServiceImplements implements ProductService {
     @Autowired
     private ProductRepository productRepository;
@@ -94,5 +96,10 @@ public class ProductServiceImplements implements ProductService {
     @Override
     public List<Product> findAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public Product save(Product product) {
+        return productRepository.save(product);
     }
 }

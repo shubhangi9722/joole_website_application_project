@@ -1,7 +1,9 @@
 package com.itlizesession.Service;
 
 import com.itlizesession.Entity.TechnicalDetail;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface TechnicalDetailService {
     boolean createTechnicalDetail(TechnicalDetail technicalDetail);
 

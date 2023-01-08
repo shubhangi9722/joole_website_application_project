@@ -3,10 +3,11 @@ package com.itlizesession.Service;
 
 import com.itlizesession.Entity.Product;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Configuration
+@Service
 public interface ProductService {
     // create
     Product createProduct(Product product);
@@ -22,4 +23,6 @@ public interface ProductService {
 
     //read all products
     List<Product> findAllProducts();
+
+    Product save(Product product);
 }

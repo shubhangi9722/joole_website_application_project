@@ -1,4 +1,4 @@
-package com.itlizesession.Service.Implements;
+package com.itlizesession.Services.Implements;
 
 import com.itlizesession.Entity.Description;
 import com.itlizesession.Service.DescriptionService;
@@ -23,7 +23,7 @@ class DescriptionServiceImplementsTest {
     @Test
     void getDescription() {
         Description description = descriptionService.getDescription(18);
-        Assertions.assertTrue(description != null);
+        Assertions.assertNotNull(description);
     }
 
     @Test

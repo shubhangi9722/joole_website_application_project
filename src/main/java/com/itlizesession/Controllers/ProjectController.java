@@ -2,6 +2,7 @@ package com.itlizesession.Controllers;
 
 
 import com.itlizesession.Entity.Project;
+import com.itlizesession.Entity.User;
 import com.itlizesession.Repository.ProjectRepository;
 import com.itlizesession.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.annotation.WebServlet;
 import java.util.List;
+import java.util.Optional;
 
-@WebServlet("/projects/projectsList")
-@Controller
+
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
@@ -27,12 +28,12 @@ public class ProjectController {
     @Autowired
     private ProjectRepository projectRepository;
 
-    @GetMapping("/{projectId}")
-    public ResponseEntity<Project> findProjectById(@PathVariable int projectId){
-        if(projectId == Integer.parseInt(" ")) {
+    @GetMapping("/{projectname}")
+    public ResponseEntity<Project> findProjectByN(@PathVariable String projectname){
+        if(projectname.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(projectService.getProject(projectId), HttpStatus.OK);
+        return new ResponseEntity<>(projectService.getProject(projectname), HttpStatus.OK);
     }
 
     @GetMapping("/projectsList")
@@ -42,19 +43,17 @@ public class ProjectController {
 
 
     @PostMapping("/createProject")
-    public ResponseEntity<Project> createProjects(@RequestBody Project createProject){
-        return new ResponseEntity<>(projectService.createProject(createProject), HttpStatus.CREATED);
+    public ResponseEntity<Project> createProjects(@RequestParam("projectName") String proj_name){
+        Project addProject = new Project();
+        addProject.setProjectName(proj_name);
+        Project addedProject = projectService.save(addProject);
+        return new ResponseEntity<>(projectService.createProject(addedProject), HttpStatus.CREATED);
     }
 
     @PutMapping("/updateProject")
-    public ResponseEntity<Project> updateProject(@RequestParam("{id}") int updateProjectId, Project project){
-        Project updated = projectRepository.findProjectByUserId(updateProjectId).orElse(null);
-        if(updated == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            projectService.updateProject(project, updated.getProjectId());
-        }
-        return new ResponseEntity<>(projectService.getProject(project.getProjectId()), HttpStatus.OK);
+    public ResponseEntity<Project> updateProject(@RequestBody Project project){
+        projectService.updateProject(project, project.getProjectId());
+        return new ResponseEntity<>(projectService.getProject(project.getProjectName()), HttpStatus.OK);
     }
 
 

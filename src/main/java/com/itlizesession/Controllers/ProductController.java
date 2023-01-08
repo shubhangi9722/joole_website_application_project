@@ -8,12 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.annotation.WebServlet;
+import javax.transaction.Transactional;
 import java.util.List;
 
 
 @WebServlet("/product/allProducts")
 @RestController
 @RequestMapping("/product")
+@Transactional
 public class ProductController {
     @Autowired
     private ProductService productService;

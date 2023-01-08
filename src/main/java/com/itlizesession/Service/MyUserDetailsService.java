@@ -3,6 +3,7 @@ package com.itlizesession.Service;
 import com.itlizesession.Repository.UserRepository;
 import com.itlizesession.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @Service
+@Configuration
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired

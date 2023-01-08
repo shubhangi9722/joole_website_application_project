@@ -4,12 +4,15 @@ import com.itlizesession.Entity.Project;
 import com.itlizesession.Repository.ProjectRepository;
 import com.itlizesession.Repository.UserRepository;
 import com.itlizesession.Service.ProjectService;
+import com.itlizesession.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Component
 public class ProjectServiceImplements implements ProjectService {
 
     @Autowired
@@ -21,15 +24,16 @@ public class ProjectServiceImplements implements ProjectService {
 
     @Override
     public Project createProject(Project project) {
-        Project created = getProject(project.getProjectId());
-        projectRepository.save(created);
-        return created;
+        //Optional<User> created = userRepository.findById(user_id);
+        //userRepository.save(project.getUser());
+        userRepository.save(project.getUser());
+        return projectRepository.save(project);
     }
 
     @Override
-    public Project getProject(Integer proj_id) {
-        if(proj_id != null){
-            return projectRepository.findProjectByProjectId(proj_id).orElse(null);
+    public Project getProject(String proj_name) {
+        if(proj_name != null){
+            return projectRepository.findProjectsByProjectName(proj_name).orElse(null);
         }
         return null;
     }
@@ -45,13 +49,15 @@ public class ProjectServiceImplements implements ProjectService {
     }
 
     @Override
-    public boolean updateProject(Project project, Integer project_id) {
-        if(project == null || project_id == null){
+    public boolean updateProject(Project project, Integer id) {
+        if(project == null || id == null){
             return false;
         }
-        Project updated = projectRepository.findProjectByUserId(project_id).orElse(null);
-        assert updated != null;
-        projectRepository.save(updated);
+        Project updated = projectRepository.findById(id).orElse(null);
+        if (updated != null) {
+            updated.setProjectName(project.getProjectName());
+            projectRepository.save(updated);
+        }
         return true;
     }
 

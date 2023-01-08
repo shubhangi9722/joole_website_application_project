@@ -4,14 +4,15 @@ import com.itlizesession.Entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
-
+@Repository
 public interface ProjectRepository extends JpaRepository <Project, Integer> {
-     Optional<Project> findProjectByProjectId (Integer project);
+     Optional<Project> findProjectByProjectId (int project);
 //
-     Optional<Project> findProjectByUserId(Integer userId);
+     Optional<Project> findProjectByUserUserName (String username);
+
+     Optional<Project> findProjectsByProjectName(String projName);
 //
 //    Optional<HashSet<Project>> findProjectsByUser (User user);
 //

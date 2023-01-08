@@ -27,7 +27,7 @@ class UserServiceTest {
         User user = new User();
         user.setUserName("kiki Chen");
         user.setEmail("kiki@gmail.com");
-        user.setPassword("kiki123");
+        user.setPassword("ki");
         user.setRole(Role.USER);
         userService.saveUser(user);
 

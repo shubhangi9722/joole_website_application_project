@@ -12,20 +12,19 @@ import javax.persistence.*;
 @Table(name = "project_product")
 public class ProjectProduct {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private int projProdId;
 
     @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="project_id")
+    @JoinColumn(name="project_id", referencedColumnName = "project_id")
     //@JsonBackReference
     @JsonIgnore
     private Project project;
 
-    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="product_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="product_id", referencedColumnName = "product_id")
     //@JsonBackReference
     @JsonIgnore
     private Product product;
@@ -52,5 +51,9 @@ public class ProjectProduct {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public String toString(){
+        return "Corresponding Product - ( " + product + ", )" + "to the Project - ( " + project + ", )";
     }
 }

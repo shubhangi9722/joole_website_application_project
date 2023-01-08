@@ -15,9 +15,12 @@ public class Project {
     @Column(name = "project_id")
     private int projectId;
 
+    @Column(name = "project_name")
+    private String projectName;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = User.class)
 //    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id", referencedColumnName = "id")
     //@JsonBackReference
     @JsonIgnore
     private User user;
@@ -27,12 +30,24 @@ public class Project {
     @JsonIgnore
     private Set<ProjectProduct> projectList = new HashSet<ProjectProduct>(){};
 
+    public Project(){
+
+    }
+
     public int getProjectId() {
         return projectId;
     }
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     public User getUser() {
@@ -49,6 +64,12 @@ public class Project {
 
     public void setProjectList(Set<ProjectProduct> projectList) {
         this.projectList = projectList;
+    }
+
+    @Override
+    public String toString() {
+        return "Projects { " + "projectId - " + projectId +
+                ", user_id - " + user + ", project_name - " + projectName + " }";
     }
 }
 

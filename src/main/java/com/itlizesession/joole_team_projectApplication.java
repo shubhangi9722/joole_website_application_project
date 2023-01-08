@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableJpaAuditing
 public class joole_team_projectApplication {
-    @RequestMapping("/")
+    @RequestMapping("")
     public String showHomePage() {
         //System.out.println("Main controller");
         return "index";
